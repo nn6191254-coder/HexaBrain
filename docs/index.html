@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101a31">
+    <meta name="description" content="Estimate your graduate admission chances from your academic profile.">
+    <title>GradPath | Admission chance estimator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <main class="page">
+        <header class="topbar">
+            <a class="brand" href="./" aria-label="GradPath home">
+                <span class="brand-mark" aria-hidden="true">G</span>
+                <span>GRADPATH</span>
+            </a>
+            <span class="privacy-note">Your profile stays in your browser.</span>
+        </header>
+
+        <div class="workspace">
+            <section class="form-panel" aria-labelledby="page-title">
+                <p class="eyebrow">Graduate admissions</p>
+                <h1 id="page-title">Plan your next step.</h1>
+                <p class="intro">Add your academic profile to get an estimated admission chance. Use your latest scores for the most useful result.</p>
+
+                <form id="prediction-form">
+                    <h2 class="section-heading"><span class="section-number">1</span> Test scores</h2>
+                    <div class="field-grid">
+                        <div class="field">
+                            <label for="gre">GRE score <span class="range">260–340</span></label>
+                            <input id="gre" name="gre" type="number" min="260" max="340" step="1" placeholder="e.g. 320" required>
+                        </div>
+                        <div class="field">
+                            <label for="toefl">TOEFL score <span class="range">0–120</span></label>
+                            <input id="toefl" name="toefl" type="number" min="0" max="120" step="1" placeholder="e.g. 110" required>
+                        </div>
+                    </div>
+
+                    <h2 class="section-heading"><span class="section-number">2</span> Academic profile</h2>
+                    <div class="field-grid">
+                        <div class="field">
+                            <label for="rating">University rating <span class="range">1–5</span></label>
+                            <input id="rating" name="rating" type="number" min="1" max="5" step="1" placeholder="e.g. 4" required>
+                        </div>
+                        <div class="field">
+                            <label for="cgpa">CGPA <span class="range">0–10</span></label>
+                            <input id="cgpa" name="cgpa" type="number" min="0" max="10" step="0.01" placeholder="e.g. 8.5" required>
+                        </div>
+                    </div>
+
+                    <h2 class="section-heading"><span class="section-number">3</span> Application strength</h2>
+                    <div class="field-grid">
+                        <div class="field">
+                            <label for="sop">Statement of purpose <span class="range">1–5</span></label>
+                            <input id="sop" name="sop" type="number" min="1" max="5" step="0.5" placeholder="e.g. 4.5" required>
+                        </div>
+                        <div class="field">
+                            <label for="lor">Letters of recommendation <span class="range">1–5</span></label>
+                            <input id="lor" name="lor" type="number" min="1" max="5" step="0.5" placeholder="e.g. 4" required>
+                        </div>
+                        <div class="field wide">
+                            <label for="research">Research experience</label>
+                            <select id="research" name="research" required>
+                                <option value="" selected disabled>Select an option</option>
+                                <option value="1">Yes, I have research experience</option>
+                                <option value="0">No research experience</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <p id="form-error" class="error" role="alert" hidden></p>
+                    <button class="submit" id="submit-button" type="submit">
+                        <span aria-hidden="true">✦</span> Estimate my chances
+                    </button>
+                </form>
+            </section>
+
+            <aside class="result-panel" aria-label="Admission estimate" aria-live="polite">
+                <p class="result-kicker">Your estimate</p>
+                <div id="empty-result">
+                    <div class="empty-state" aria-hidden="true">↗</div>
+                    <h2 id="result-title">Your results will appear here.</h2>
+                    <p class="result-copy">Complete the profile to see an estimate and a helpful next step.</p>
+                </div>
+                <div id="prediction-result" hidden>
+                    <h2 id="result-title-ready">A clearer view of your profile.</h2>
+                    <p class="result-copy">Based on the information you provided and the model's training data.</p>
+                    <div class="score-card">
+                        <p class="score-label">Estimated admission chance</p>
+                        <p class="score"><span id="score-value">0.0</span><span>%</span></p>
+                        <div class="meter" id="meter" role="meter" aria-label="Estimated admission chance" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                            <div class="meter-fill" id="meter-fill"></div>
+                        </div>
+                        <div class="meter-labels"><span>0%</span><span>100%</span></div>
+                    </div>
+                    <p class="result-status" id="result-status"></p>
+                </div>
+                <p class="result-disclaimer">This is a model-based estimate, not an admission decision or guarantee. Actual outcomes depend on each program and the full application.</p>
+            </aside>
+        </div>
+
+        <p class="footer">GradPath is designed to help you explore your options—not replace advice from universities or admissions counselors.</p>
+    </main>
+</body>
+</html>
